@@ -172,3 +172,90 @@ La clase EstadoFactory evita que el resto del sistema dependa de clases concreta
 #### Delegación y Polimorfismo
 El comportamiento variable se implementa mediante polimorfismo
 Las clases del modelo trabajan con la abstracción EstadoCelda permitiendo que cualquier implementación sea utilizada sin alterar el funcionamiento
+
+
+## Clases Principales y Responsabilidades
+
+### Tablero
+Responsabilidades:
+- Mantener la matriz de celdas
+- Calcular vecinos vivos
+- Avance del tablero de una generación a la siguiente
+- Detectar cuando ya no haya cambios
+- Inicializar el tablero
+Calcular una nueva generación se realiza en dos fases:
+1) Se determinan los nuevos estados sin modificar el tablero actual 
+2) Se actualizan todas las celdas simultáneamente
+
+---
+### Celda
+Responsabilidades:
+- Mantener su estado actual
+- Delegar el cálculo del siguiente estado
+- Actualizar su estado
+Delega el comportamiento dinámico al objeto EstadoCelda
+---
+### EstadoCelda (Interfaz)
+Define funciones comunes:
+- siguienteEstado(int vecinosVivos)
+- estaViva()
+- getRepresentacion()
+Las clases del modelo trabajan contra esta abstracción permitiendo el uso de polimorfismo
+---
+### Estados
+Cada estado encapsula su propia logica, evita estructuras condicionales basadas en el tipo
+EstadoViva:
+- Implementa reglas de supervivencia
+- Puede convertirse en Enferma con una probabilidad del 25%
+   
+EstadoMuerta:
+- Revive con exactamente 3 vecinos vivos
+
+EstadoEnferma:
+- Muere obligatoriamente en la siguiente generación
+
+EstadoLatente:
+- Revive con exactamente 1 vecino vivo
+---
+### EstadoFactory
+Responsabilidades:
+- Centralizar la creación de estados
+- Manejo de caracteres del archivo en objetos concretos
+- Evitar dependencia directa con clases concretas
+---
+### LectorArchivo
+Responsabilidades:
+- Validar formato
+- Crear el tablero
+- Delegar creación de estados a EstadoFactory
+---
+### CLI
+Responsabilidades:
+- Interactuar con el usuario
+- Solicitar entradas
+- Controlar flujo de ejecución
+- Mostrar el tablero
+
+## Cálculo del próximo estado de una celda:
+### 1) Cálculo de vecinos
+Para cada celda del tablero se calcula la cantidad de vecinos vivos  
+Se consideran las ocho posiciones (horizontal/vertical/diagonal) verificando que cada posición se encuentre dentro de los límites del tablero
+### 2) Cálculo del siguiente estado (sin modificar el tablero)
+Con la cantidad de vecinos vivos cada celda delega en su objeto EstadoCelda
+```java
+siguienteEstado(int vecinosVivos)
+```
+- No se modifica el estado actual de las celdas
+- Los nuevos estados se almacenan temporalmente en una estructura auxiliar
+- Todas las transiciones se calculan en base al estado completo de la generación actual
+---
+### 3) Actualización simultánea
+
+Una vez que todos los nuevos estados fueron calculado el tablero actualiza cada celda con su nuevo estado
+
+---
+### 4) Detectar Fin
+Durante el proceso de actualización se verifica si alguna celda cambió de estado
+Si ninguna celda modifica su estado respecto de la generación anterior, la ejecución se detiene
+
+---
