@@ -1,5 +1,31 @@
 # Trabajo Práctico Final Libre – Programación II TUDAI
 
+# Tabla de Contenidos
+
+1. [Ejecución del programa](#ejecución-del-programa)
+2. [Requisitos de Diseño](#requisitos-de-diseño)
+    - [Separación entre lógica del modelo y presentación](#•-separación-entre-lógica-del-modelo-y-presentación)
+    - [Principios SOLID](#•-aplicar-principios-solid)
+    - [Manejo de Errores y Validaciones](#•-manejo-de-errores-y-validaciones)
+    - [Permitir extender el juego](#•-permitir-extender-el-juego)
+3. [Patrones de diseño](#patrones-de-diseño)
+    - [Patrón State](#patron-state)
+    - [Patrón Factory](#patron-factory)
+    - [Delegación y Polimorfismo](#delegación-y-polimorfismo)
+4. [Clases Principales y Responsabilidades](#clases-principales-y-responsabilidades)
+    - [Tablero](#tablero)
+    - [Celda](#celda)
+    - [EstadoCelda (Interfaz)](#estadocelda-interfaz)
+    - [Estados](#estados)
+    - [EstadoFactory](#estadofactory)
+    - [LectorArchivo](#lectorarchivo)
+    - [CLI](#cli)
+5. [Cálculo del próximo estado de una celda](#cálculo-del-próximo-estado-de-una-celda)
+    - [Cálculo de vecinos](#1-cálculo-de-vecinos)
+    - [Cálculo del siguiente estado](#2-cálculo-del-siguiente-estado-sin-modificar-el-tablero)
+    - [Actualización simultánea](#3-actualización-simultánea)
+    - [Detectar Fin](#4-detectar-fin)
+
 ## Ejecución del programa:
 Desde la raíz del proyecto ejecutar en consola:
 ```
