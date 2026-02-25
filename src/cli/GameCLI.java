@@ -6,10 +6,18 @@ import utils.Utils;
 
 public class GameCLI {
 
+    //leer archivos de tablero
+    //construir objeto tablero
+    //cargar estado inicial del juego desde un archivo dado
+    
     private Tablero tablero;
 
     public GameCLI() {}
 
+    // interfaz CLI
+    //mostrar menu
+    //elegir inicializacion
+    //pedir params de simulacion y ejecucion
     public void ejecutar() {
         System.out.println("insertar: 1 cargar archivo, 2 aleatorio");
         int opcion = Utils.leerInt();
@@ -35,6 +43,7 @@ public class GameCLI {
 
         boolean hayCambios = true;
         int generacion = 0;
+        //mostrar generaciones hasta que no haya cambios (o alcance max generaciones indicadas por el usuario)
         while (hayCambios && (generaciones == 0 || generacion < generaciones)) {
             System.out.println("num: " + generacion);
             System.out.print(tablero);
@@ -52,6 +61,10 @@ public class GameCLI {
         }
     }
 
+    //carga el tablero desde un archivo
+    // ej: ejemplos/ejemplo1.txt
+    // retorna el tablero construido o null si hay un error
+    //manejo de errores, permite volver a ingresar la ruta del archivo en caso de error
     private void cargarDesdeArchivo() {
         LectorArchivo lector = new LectorArchivo();
         boolean cargado = false;
@@ -71,6 +84,8 @@ public class GameCLI {
         }
     }
 
+    //inicializar el tablero de forma aleatorio
+    //el usuario inserta: filas, columnas, % de celda viva
     private void inicializarAleatorio() {
         System.out.print("filas: ");
         int filas = Utils.leerInt();

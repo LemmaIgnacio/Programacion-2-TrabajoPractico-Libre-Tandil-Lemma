@@ -2,6 +2,9 @@ package model.celda.estados;
 
 public class EstadoEnferma implements EstadoCelda {
 
+    //se concidera celda viva
+    // muere en la siguiente generacion
+    // celda enferma -> celda muerta
     @Override
     public EstadoCelda siguienteEstado(int vecinosVivos) {
         return new EstadoMuerta();

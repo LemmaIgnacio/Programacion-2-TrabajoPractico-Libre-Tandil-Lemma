@@ -8,10 +8,15 @@ import model.celda.estados.EstadoViva;
 
 public class Tablero {
 
+ // representa el tablero
+ // Mantiene la matriz de celdas, gestiona la evolución generacional,
+  //calcula vecinos vivos y detecta sino hubo cambios
+
     private Celda[][] celdas;
     private int filas;
     private int columnas;
 
+    // crea un tablero con la cantidad de filas y columnas por parametro
     public Tablero(int filas, int columnas) {
         this.filas = filas;
         this.columnas = columnas;
@@ -34,6 +39,7 @@ public class Tablero {
         return columnas;
     }
 
+    //  calcilar el numero de vecinos vivos en una celda
     private int contarVecinosVivos(int fila, int columna) {
         int vivos = 0;
         for (int i = -1; i <= 1; i++) {
@@ -52,11 +58,17 @@ public class Tablero {
         return vivos;
     }
 
+    //verifica si la posicion se encuentra en el tablero
     private boolean esPosicionValida(int fila, int columna) {
         return fila >= 0 && fila < filas &&
                 columna >= 0 && columna < columnas;
     }
 
+    // avanzar con la generacion del tablero
+    //calcular nuevo estado de las celdas 
+    //actualizar el tablero
+    // hubo cambios -> true
+    // no hubo cambios -> false
     public boolean avanzarGeneracion() {
         EstadoCelda[][] nuevosEstados = new EstadoCelda[filas][columnas];
         boolean huboCambios = false;
@@ -78,6 +90,8 @@ public class Tablero {
         return huboCambios;
     }
 
+    //crear un tablero aleatorio
+    //toma encuenta % de celdas vivas
     public void inicializarAleatorio(double probabilidadViva) {
         Random r = new Random();
         for (int i = 0; i < filas; i++) {

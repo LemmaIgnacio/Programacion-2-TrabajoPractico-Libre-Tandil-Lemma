@@ -8,7 +8,8 @@ public class EstadoViva implements EstadoCelda {
 
     @Override
     public EstadoCelda siguienteEstado(int vecinosVivos) {
-
+        //devolver el siguiente estado segun vecinos vivos
+        //25% de pasar a EstadoEnferma
         if (random.nextDouble() < 0.25) {
             return new EstadoEnferma();
         }

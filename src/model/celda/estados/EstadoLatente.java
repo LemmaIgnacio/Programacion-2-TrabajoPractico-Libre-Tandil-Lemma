@@ -4,7 +4,8 @@ public class EstadoLatente implements EstadoCelda {
 
     @Override
     public EstadoCelda siguienteEstado(int vecinosVivos) {
-
+        //se concidera celda muerta
+        //revive si tiene 1 vecino vivo
         if (vecinosVivos == 1) {
             return new EstadoViva();
         }

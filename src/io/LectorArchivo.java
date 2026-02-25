@@ -9,6 +9,8 @@ import model.tablero.Tablero;
 
 public class LectorArchivo {
 
+    //leer archivos de tablero y construir su tablero
+    //cargar estado inicial desde un archivo txt
     public Tablero cargarDesdeArchivo(String ruta) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             String primeraLinea = br.readLine();

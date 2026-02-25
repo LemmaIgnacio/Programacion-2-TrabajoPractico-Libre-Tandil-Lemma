@@ -4,7 +4,7 @@ public class EstadoMuerta implements EstadoCelda {
 
     @Override
     public EstadoCelda siguienteEstado(int vecinosVivos) {
-
+        //revive si tiene 3 vecinos vivos
         if (vecinosVivos == 3) {
             return new EstadoViva();
         }
